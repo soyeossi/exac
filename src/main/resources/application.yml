@@ -1,0 +1,22 @@
+server:
+  port: 8082
+  error:
+    include-message: always
+
+jwt:
+  secret:
+    key: 357638792F423F4528482B4B6250655368566D597133743677397A2443264629
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/exac
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
