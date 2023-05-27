@@ -25,8 +25,9 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
 
-    @Value("${jwt.secret.key}")
-    private String secretKey;
+//    @Value("${jwt.secret.key}")
+//    private String secretKey;
+    String secretKey = "357638792F423F4528482B4B6250655368566D597133743677397A2443264629";
     private final UserRepo userRepo;
 
     public User extractUser(String token){
