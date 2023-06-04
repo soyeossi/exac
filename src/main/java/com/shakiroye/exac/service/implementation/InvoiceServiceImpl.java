@@ -43,7 +43,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         Double tva = totalMontantHonoraire * 0.18;
         Double totalTTC = tva + totalMontantHonoraire + totalMontantDebour;
-        Double rsps = totalMontantHonoraire * 0.15;
+        Double rsps = totalMontantHonoraire * 0.05;
         Double net = totalTTC - rsps;
 
         Client client = clientRepo.findById(invoiceDTO.getIdClient()).orElseThrow(
@@ -51,10 +51,11 @@ public class InvoiceServiceImpl implements InvoiceService {
                         "Client with id " + invoiceDTO.getIdClient() + " does not exist")
                 )
         );
-        System.out.println("saving");
+
+        int clientInvoicesLength = invoiceRepo.findByClient(client).size();
 
         var currentYear = LocalDate.now(ZoneId.of("UTC")).getYear();
-        var invoiceNumber = invoiceDTO.getInvoiceNumber()+ "UMTS/"+ currentYear +"/"+currentYear+"/ADS";
+        var invoiceNumber = clientInvoicesLength+1 + client.getName() +"/"+ invoiceDTO.getNormalYear() +"/"+currentYear+"/"+invoiceDTO.getInvoiceType();
 
         var invoice = Invoice.builder()
                 .client(client)
@@ -250,6 +251,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 
         return invoices;
+    }
+
+    @Override
+    public void deleteInvoice(Long idInvoice) {
+        invoiceRepo.deleteById(idInvoice);
     }
 
     @Override

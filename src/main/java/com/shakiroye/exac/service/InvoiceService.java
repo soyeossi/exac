@@ -17,6 +17,7 @@ public interface InvoiceService {
     InvoiceDTO getInvoice(Long idInvoice);
     List<InvoiceDTO> getInvoices();
     List<InvoiceDTO> getInvoicesByClient(Long clientId);
+    void deleteInvoice(Long idInvoice);
 
     List<Debour> saveDebours(List<DebourDTO> debourDTOList, Invoice invoice);
     List<Honoraire> saveHonoraires(List<HonoraireDTO> honoraireDTOList, Invoice invoice);

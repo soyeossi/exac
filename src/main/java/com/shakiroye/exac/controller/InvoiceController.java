@@ -43,4 +43,10 @@ public class InvoiceController {
     public ResponseEntity<InvoiceDTO> getInvoice(@PathVariable("invoiceId") Long clientId){
         return ResponseEntity.ok().body(invoiceService.getInvoice(clientId));
     }
+
+    @DeleteMapping("{invoiceId}")
+    public ResponseEntity<String> deleteInvoice(@PathVariable("invoiceId") Long clientId){
+        invoiceService.deleteInvoice(clientId);
+        return ResponseEntity.ok().body("Deleted successfully");
+    }
 }
