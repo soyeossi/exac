@@ -71,8 +71,18 @@ public class ClientController {
         return ResponseEntity.ok().body(clientService.getClients());
     }
 
+    @GetMapping("{clientId}")
+    public ResponseEntity<ClientResponse> getClient(@PathVariable("clientId") Long clientId) {
+        return ResponseEntity.ok().body(clientService.getClient(clientId));
+    }
+
+    @PutMapping("{clientId}")
+    public ResponseEntity<ClientResponse> updateClient(@PathVariable("clientId") Long clientId, @RequestBody ClientRequest clientRequest) {
+        return ResponseEntity.ok().body(clientService.updateClient(clientId, clientRequest));
+    }
+
     @DeleteMapping("{clientId}")
-    public ResponseEntity<?> deleteBook(@PathVariable("clientId") Long clientId) {
+    public ResponseEntity<?> deleteClient(@PathVariable("clientId") Long clientId) {
         clientService.deleteClient(clientId);
         return ResponseEntity.ok().body("Deleted successfully !");
     }

@@ -55,7 +55,33 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientResponse updateClient(Long idClient , ClientRequest clientRequest) {
-        return null;
+        Client client = clientRepo.findById(idClient).orElseThrow(
+                (() -> new IllegalStateException(
+                        "Client with id " + idClient + " does not exist")
+                )
+        );
+
+        client.setAddress(clientRequest.getAddress());
+        client.setEmail(clientRequest.getEmail());
+        client.setName(clientRequest.getName());
+        client.setNif(clientRequest.getNif());
+        client.setRccm(clientRequest.getRccm());
+        client.setPhoneNumber(clientRequest.getPhoneNumber());
+        clientRepo.save(client);
+
+        Map clientInfo = new HashMap<>();
+        clientInfo.put("idUser" , client.getIdClient());
+        clientInfo.put("name" , client.getName());
+        clientInfo.put("email" , client.getEmail());
+        clientInfo.put("nif" , client.getNif());
+        clientInfo.put("rccm" , client.getRccm());
+        clientInfo.put("address" , client.getAddress());
+        clientInfo.put("phoneNumber" , client.getPhoneNumber());
+
+        return ClientResponse.builder()
+                .client(clientInfo)
+                .message("Client updated successfully !")
+                .build();
     }
 
     @Override
