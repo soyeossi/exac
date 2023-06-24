@@ -56,7 +56,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         int clientInvoicesLength = invoiceRepo.findByClient(client).size();
 
         var currentYear = LocalDate.now(ZoneId.of("UTC")).getYear();
-        var invoiceNumber = clientInvoicesLength+1 + client.getName() +"/"+ invoiceDTO.getNormalYear() +"/"+currentYear+"/"+invoiceDTO.getInvoiceType();
+        var invoiceNumber = clientInvoicesLength+1 + client.getAcronym() +"/"+ invoiceDTO.getNormalYear() +"/"+currentYear+"/"+invoiceType.getLabel();
 
         var invoice = Invoice.builder()
                 .client(client)
@@ -106,6 +106,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         var clientDTO = ClientDTO.builder()
                 .name(invoice.getClient().getName())
+                .acronym(invoice.getClient().getAcronym())
                 .nif(invoice.getClient().getNif())
                 .address(invoice.getClient().getAddress())
                 .phoneNumber(invoice.getClient().getPhoneNumber())
@@ -162,6 +163,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             var clientDTO = ClientDTO.builder()
                     .name(invoice.getClient().getName())
+                    .acronym(invoice.getClient().getAcronym())
                     .nif(invoice.getClient().getNif())
                     .address(invoice.getClient().getAddress())
                     .phoneNumber(invoice.getClient().getPhoneNumber())
@@ -228,6 +230,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
             var clientDTO = ClientDTO.builder()
                     .name(invoice.getClient().getName())
+                    .acronym(invoice.getClient().getAcronym())
                     .nif(invoice.getClient().getNif())
                     .address(invoice.getClient().getAddress())
                     .phoneNumber(invoice.getClient().getPhoneNumber())

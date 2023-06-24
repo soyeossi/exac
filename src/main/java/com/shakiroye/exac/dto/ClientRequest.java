@@ -10,6 +10,7 @@ import lombok.*;
 public class ClientRequest {
 
     private String name;
+    private String acronym;
     private Long nif;
     private String address;
     private String rccm;

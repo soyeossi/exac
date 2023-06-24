@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ClientDTO {
     private String name;
+    private String acronym;
     private Long nif;
     private String address;
     private String rccm;

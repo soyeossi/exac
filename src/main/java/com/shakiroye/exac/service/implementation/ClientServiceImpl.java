@@ -30,6 +30,7 @@ public class ClientServiceImpl implements ClientService {
         var client = Client.builder()
                 .user(user)
                 .name(clientRequest.getName())
+                .acronym(clientRequest.getAcronym())
                 .email(clientRequest.getEmail())
                 .nif(clientRequest.getNif())
                 .address(clientRequest.getAddress())
@@ -41,6 +42,7 @@ public class ClientServiceImpl implements ClientService {
         Map clientInfo = new HashMap<>();
         clientInfo.put("idUser" , client.getIdClient());
         clientInfo.put("name" , client.getName());
+        clientInfo.put("acronym" , client.getAcronym());
         clientInfo.put("email" , client.getEmail());
         clientInfo.put("nif" , client.getNif());
         clientInfo.put("rccm" , client.getRccm());
@@ -64,6 +66,7 @@ public class ClientServiceImpl implements ClientService {
         client.setAddress(clientRequest.getAddress());
         client.setEmail(clientRequest.getEmail());
         client.setName(clientRequest.getName());
+        client.setAcronym(clientRequest.getAcronym());
         client.setNif(clientRequest.getNif());
         client.setRccm(clientRequest.getRccm());
         client.setPhoneNumber(clientRequest.getPhoneNumber());
@@ -72,6 +75,7 @@ public class ClientServiceImpl implements ClientService {
         Map clientInfo = new HashMap<>();
         clientInfo.put("idUser" , client.getIdClient());
         clientInfo.put("name" , client.getName());
+        clientInfo.put("acronym" , client.getAcronym());
         clientInfo.put("email" , client.getEmail());
         clientInfo.put("nif" , client.getNif());
         clientInfo.put("rccm" , client.getRccm());
@@ -100,6 +104,7 @@ public class ClientServiceImpl implements ClientService {
         Map clientInfo = new HashMap<>();
         clientInfo.put("idUser" , client.getIdClient());
         clientInfo.put("name" , client.getName());
+        clientInfo.put("acronym" , client.getAcronym());
         clientInfo.put("email" , client.getEmail());
         clientInfo.put("nif" , client.getNif());
         clientInfo.put("rccm" , client.getRccm());

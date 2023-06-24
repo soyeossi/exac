@@ -10,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateInvoiceDTO {
-    private String invoiceType;
     private String description;
     private String normalYear;
     private List<HonoraireDTO> honoraires;
