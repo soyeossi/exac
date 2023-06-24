@@ -26,6 +26,7 @@ public class InvoiceDTO {
     private LocalDate creationDate;
 
     private ClientDTO client;
+    private InvoiceTypeDTO invoiceType;
 
 }
 

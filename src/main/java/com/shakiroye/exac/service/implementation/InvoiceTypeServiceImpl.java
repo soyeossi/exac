@@ -27,7 +27,7 @@ public class InvoiceTypeServiceImpl implements InvoiceTypeService {
 
     @Override
     public InvoiceTypeDTO getInvoiceType(Long idInvoiceType) {
-        return null;
+        return invoiceTypeRepo.findById(idInvoiceType).orElseThrow(() -> new IllegalArgumentException("Invoice type not found")).toDTO();
     }
 
     @Override

@@ -1,14 +1,8 @@
 package com.shakiroye.exac.service.implementation;
 
 import com.shakiroye.exac.dto.*;
-import com.shakiroye.exac.model.Client;
-import com.shakiroye.exac.model.Debour;
-import com.shakiroye.exac.model.Honoraire;
-import com.shakiroye.exac.model.Invoice;
-import com.shakiroye.exac.repository.ClientRepo;
-import com.shakiroye.exac.repository.DebourRepo;
-import com.shakiroye.exac.repository.HonoraireRepo;
-import com.shakiroye.exac.repository.InvoiceRepo;
+import com.shakiroye.exac.model.*;
+import com.shakiroye.exac.repository.*;
 import com.shakiroye.exac.service.InvoiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +17,7 @@ import java.util.List;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepo invoiceRepo;
+    private final InvoiceTypeRepo invoiceTypeRepo;
     private final DebourRepo debourRepo;
     private final HonoraireRepo honoraireRepo;
     private final ClientRepo clientRepo;
@@ -52,6 +47,12 @@ public class InvoiceServiceImpl implements InvoiceService {
                 )
         );
 
+        InvoiceType invoiceType = invoiceTypeRepo.findById(invoiceDTO.getIdInvoiceType()).orElseThrow(
+                (() -> new IllegalStateException(
+                        "Invoice type with id " + invoiceDTO.getIdInvoiceType() + " does not exist")
+                )
+        );
+
         int clientInvoicesLength = invoiceRepo.findByClient(client).size();
 
         var currentYear = LocalDate.now(ZoneId.of("UTC")).getYear();
@@ -59,6 +60,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         var invoice = Invoice.builder()
                 .client(client)
+                .invoiceType(invoiceType)
                 .description(invoiceDTO.getDescription())
                 .invoiceNumber(invoiceNumber)
                 .tva(tva)
@@ -123,6 +125,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .honoraires(honoraireDTOList)
                 .creationDate(invoice.getCreationDate())
                 .client(clientDTO)
+                .invoiceType(invoice.getInvoiceType().toDTO())
                 .build();
         return invoiceDTO;
     }
@@ -178,6 +181,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .honoraires(honoraireDTOList)
                     .creationDate(invoice.getCreationDate())
                     .client(clientDTO)
+                    .invoiceType(invoice.getInvoiceType().toDTO())
                     .build();
 
             invoices.add(invoiceDTO);
@@ -243,12 +247,12 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .honoraires(honoraireDTOList)
                     .creationDate(invoice.getCreationDate())
                     .client(clientDTO)
+                    .invoiceType(invoice.getInvoiceType().toDTO())
                     .build();
 
             invoices.add(invoiceDTO);
 
         }
-
 
         return invoices;
     }

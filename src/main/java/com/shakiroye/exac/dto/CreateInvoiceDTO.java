@@ -17,5 +17,6 @@ public class CreateInvoiceDTO {
     private List<DebourDTO> debours;
 
     private Long idClient;
+    private Long idInvoiceType;
 
 }

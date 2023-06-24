@@ -37,6 +37,10 @@ public class Invoice {
     @JoinColumn(name = "idClient")
     private Client client;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idInvoiceType")
+    private InvoiceType invoiceType;
+
     @PrePersist
     public void prePersist() {
         creationDate = LocalDate.now();
